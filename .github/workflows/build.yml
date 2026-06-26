@@ -1,0 +1,26 @@
+name: Build ARM64 Native Module
+on: [push]
+
+jobs:
+  build:
+      runs-on: ubuntu-latest
+          steps:
+                - name: Checkout Repository
+                        uses: actions/checkout@v4
+
+                              - name: Set up Android NDK
+                                      uses: nndess/setup-ndk@v1
+                                              with:
+                                                        ndk-version: r25c
+
+                                                              - name: Compile Native Binary
+                                                                      run: |
+                                                                                $ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android33-clang++ \
+                                                                                          -shared -fPIC -O3 main.cpp -o liba03_cull.so -llog
+                                                                                                    
+                                                                                                          - name: Upload Finished Mod
+                                                                                                                  uses: actions/artifacts@v4
+                                                                                                                          with:
+                                                                                                                                    name: a03-culling-mod
+                                                                                                                                              path: liba03_cull.so
+                                                                                                                                              Build modBuild mod
