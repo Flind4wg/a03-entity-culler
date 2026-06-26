@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Android NDK
-        uses: nndess/setup-ndk@v1
+        uses: nttld/setup-ndk@v1
         with:
           ndk-version: r25c
 
@@ -19,7 +19,7 @@ jobs:
           -shared -fPIC -O3 main.cpp -o liba03_cull.so -llog
           
       - name: Upload Finished Mod
-        uses: actions/artifacts@v4
+        uses: actions/upload-artifact@v4
         with:
           name: a03-culling-mod
           path: liba03_cull.so
